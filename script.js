@@ -182,25 +182,18 @@ document.addEventListener('keydown', (e) => {
     if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.Right = true;
     if (e.code === 'ArrowUp' || e.code === 'KeyW') keys.Up = true;
     if (e.code === 'ArrowDown' || e.code === 'KeyS') keys.Down = true;
-    if (e.code === 'Digit1') keys[1] = true;
-    if (e.code === 'Digit2') keys[2] = true;
-    if (e.code === 'Digit3') keys[3] = true;
-    if (e.code === 'Digit4') keys[4] = true;
-    if (e.code === 'Digit5') keys[5] = true;
+    if (e.code === 'KeyQ') keys[1] = true;
+    if (e.code === 'KeyE') keys[2] = true;
+    if (e.code === 'KeyC') keys[3] = true;
+    if (e.code === 'KeyX') keys[4] = true;
+    if (e.code === 'KeyZ') keys[5] = true;
     if (e.code === 'Space' || e.code === 'Enter' || e.code === 'NumpadEnter') {
-        e.preventDefault(); // Stop page scrolling if any
+        e.preventDefault();
         if (e.code === 'Space') keys.Space = true;
         if (e.code === 'Enter' || e.code === 'NumpadEnter') keys.Enter = true;
         if (currentState === STATE.START || currentState === STATE.GAME_OVER || currentState === STATE.WIN) {
             document.getElementById('win-screen').classList.add('hidden');
             startGame();
-        }
-    }
-    if (e.code === 'KeyB') {
-        if (currentState === STATE.START || currentState === STATE.PLAYING) {
-            if (currentState === STATE.START) startGame();
-            level = 11;
-            initLevel();
         }
     }
 });
@@ -209,11 +202,11 @@ document.addEventListener('keyup', (e) => {
     if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.Right = false;
     if (e.code === 'ArrowUp' || e.code === 'KeyW') keys.Up = false;
     if (e.code === 'ArrowDown' || e.code === 'KeyS') keys.Down = false;
-    if (e.code === 'Digit1') keys[1] = false;
-    if (e.code === 'Digit2') keys[2] = false;
-    if (e.code === 'Digit3') keys[3] = false;
-    if (e.code === 'Digit4') keys[4] = false;
-    if (e.code === 'Digit5') keys[5] = false;
+    if (e.code === 'KeyQ') keys[1] = false;
+    if (e.code === 'KeyE') keys[2] = false;
+    if (e.code === 'KeyC') keys[3] = false;
+    if (e.code === 'KeyX') keys[4] = false;
+    if (e.code === 'KeyZ') keys[5] = false;
     if (e.code === 'Space') keys.Space = false;
     if (e.code === 'Enter' || e.code === 'NumpadEnter') keys.Enter = false;
 });
