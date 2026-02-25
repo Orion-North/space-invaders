@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Press Start 2P', monospace;
+    overflow: hidden;
+    color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+}
+
+/* CRT Effects */
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.crt-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 10vw rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+    z-index: 11;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+/* UI Overlays */
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 5;
+    color: #0f0;
+    font-size: clamp(16px, 2vw, 32px);
+    text-shadow: 0 0 5px #0f0;
+}
+
+.top-hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.abilities-hud {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ability {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #555;
+    background: rgba(0, 0, 0, 0.7);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+    text-shadow: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.ability .key {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: #ff0;
+    font-size: 10px;
+}
+
+.ability .name {
+    margin-top: 10px;
+    color: #0ff;
+    z-index: 2;
+}
+
+.ability.ready {
+    border-color: #0ff;
+    box-shadow: 0 0 10px #0ff;
+}
+
+.ability .cooldown-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 20;
+}
+
+.screen h1 {
+    font-size: clamp(30px, 5vw, 80px);
+    color: #0ff;
+    text-shadow: 0 0 20px #0ff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.screen p {
+    font-size: clamp(14px, 2vw, 24px);
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.controls-info {
+    margin-top: 40px;
+    text-align: center;
+    color: #aaa;
+    font-size: clamp(10px, 1.5vw, 18px);
+    line-height: 2;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.active {
+    display: flex !important;
+}
+
+#dialogue-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 150px;
+    background-color: #000;
+    border: 4px solid #fff;
+    border-radius: 8px;
+    z-index: 30;
+    display: flex;
+    padding: 15px;
+    gap: 20px;
+}
+
+.portrait-box {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #555;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+}
+
+#portrait-canvas {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+.text-box {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#dialogue-name {
+    font-size: clamp(14px, 1.5vw, 24px);
+    color: #ff0;
+    margin-bottom: 10px;
+}
+
+#dialogue-text {
+    font-size: clamp(12px, 1.2vw, 18px);
+    color: #fff;
+    line-height: 1.5;
+    /* Undertale dialogue sound pitch can vary here hypothetically */
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <div class="scanlines"></div>
+        <div class="crt-glow"></div>
+
+        <div id="start-screen" class="screen active">
+            <h1>SPACE INVADERS</h1>
+            <p>PRESS ENTER TO START</p>
+            <div class="controls-info">
+                <p>LEFT/RIGHT or A/D to MOVE</p>
+                <p>SPACE to SHOOT</p>
+            </div>
+        </div>
+
+        <div id="ui-layer" class="hidden">
+            <div class="top-hud">
+                <div class="score">SCORE <span id="score-val">0000</span></div>
+                <div class="level">LEVEL <span id="level-val">1</span></div>
+                <div class="lives">LIVES <span id="lives-val">3</span></div>
+            </div>
+            <div class="abilities-hud">
+                <div class="ability ready" id="ability-1">
+                    <span class="key">1</span>
+                    <span class="name">RAIL</span>
+                    <div class="cooldown-overlay" id="cd-1" style="height: 0%;"></div>
+                </div>
+                <div class="ability ready" id="ability-2">
+                    <span class="key">2</span>
+                    <span class="name">TIME</span>
+                    <div class="cooldown-overlay" id="cd-2" style="height: 0%;"></div>
+                </div>
+                <div class="ability ready" id="ability-3">
+                    <span class="key">3</span>
+                    <span class="name">EMP</span>
+                    <div class="cooldown-overlay" id="cd-3" style="height: 0%;"></div>
+                </div>
+                <div class="ability ready" id="ability-4">
+                    <span class="key">4</span>
+                    <span class="name">INV</span>
+                    <div class="cooldown-overlay" id="cd-4" style="height: 0%;"></div>
+                </div>
+                <div class="ability ready" id="ability-5">
+                    <span class="key">5</span>
+                    <span class="name">NUKE</span>
+                    <div class="cooldown-overlay" id="cd-5" style="height: 0%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="game-canvas"></canvas>
+
+        <div id="game-over-screen" class="screen hidden">
+            <h1>GAME OVER</h1>
+            <p>SCORE: <span id="final-score">0000</span></p>
+            <p class="blink">PRESS ENTER TO RESTART</p>
+        </div>
+
+        <div id="level-screen" class="screen hidden">
+            <h1>LEVEL COMPLETED</h1>
+            <p>GET READY</p>
+        </div>
+
+        <div id="win-screen" class="screen hidden">
+            <h1 style="color: #ffdd00; text-shadow: 0 0 20px #ff8800, 0 0 40px #ff4400;">VICTORY!</h1>
+            <p>COMMANDER KRAZOK HAS BEEN DEFEATED</p>
+            <p>FINAL SCORE: <span id="win-score">0000</span></p>
+            <p class="blink" style="margin-top: 30px;">PRESS ENTER TO PLAY AGAIN</p>
+        </div>
+
+        <div id="dialogue-container" class="hidden">
+            <div class="portrait-box"><canvas id="portrait-canvas" width="60" height="60"></canvas></div>
+            <div class="text-box">
+                <div id="dialogue-name">???</div>
+                <div id="dialogue-text"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
