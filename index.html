@@ -28,6 +28,7 @@
                 <div class="score">SCORE <span id="score-val">0000</span></div>
                 <div class="level">LEVEL <span id="level-val">1</span></div>
                 <div class="lives">LIVES <span id="lives-val">3</span></div>
+                <button id="pause-btn" class="pause-btn">||</button>
             </div>
             <div class="abilities-hud">
                 <div class="ability ready" id="ability-1">
@@ -76,6 +77,11 @@
             <p>COMMANDER KRAZOK HAS BEEN DEFEATED</p>
             <p>FINAL SCORE: <span id="win-score">0000</span></p>
             <p class="blink" style="margin-top: 30px;">PRESS ENTER TO PLAY AGAIN</p>
+        </div>
+
+        <div id="pause-screen" class="screen hidden">
+            <h1 style="color: #00ffff; text-shadow: 0 0 20px #0088ff;">PAUSED</h1>
+            <p class="blink" style="margin-top: 30px;">PRESS ESC TO RESUME</p>
         </div>
 
         <div id="dialogue-container" class="hidden">

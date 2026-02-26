@@ -12,6 +12,8 @@ const dialogueContainer = document.getElementById('dialogue-container');
 const dialogueName = document.getElementById('dialogue-name');
 const dialogueText = document.getElementById('dialogue-text');
 const portraitCanvas = document.getElementById('portrait-canvas');
+const pauseBtn = document.getElementById('pause-btn');
+const pauseScreen = document.getElementById('pause-screen');
 const portraitCtx = portraitCanvas.getContext('2d');
 portraitCtx.imageSmoothingEnabled = false;
 
@@ -173,8 +175,25 @@ function playSound(type) {
     }
 }
 
-const STATE = { START: 0, PLAYING: 1, GAME_OVER: 2, NEXT_LEVEL: 3, BOSS_INTRO: 4, BOSS_FIGHT: 5, WIN: 6 };
+const STATE = { START: 0, PLAYING: 1, GAME_OVER: 2, NEXT_LEVEL: 3, BOSS_INTRO: 4, BOSS_FIGHT: 5, WIN: 6, PAUSE: 7 };
 let currentState = STATE.START;
+let savedState = null; // To remember if we were PLAYING or BOSS_FIGHT when paused
+
+function togglePause() {
+    if (currentState === STATE.PLAYING || currentState === STATE.BOSS_FIGHT) {
+        savedState = currentState;
+        currentState = STATE.PAUSE;
+        pauseScreen.classList.remove('hidden');
+        if (audioCtx.state === 'running') audioCtx.suspend();
+    } else if (currentState === STATE.PAUSE) {
+        currentState = savedState;
+        savedState = null;
+        pauseScreen.classList.add('hidden');
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+}
+
+pauseBtn.addEventListener('click', togglePause);
 
 const keys = { Left: false, Right: false, Up: false, Down: false, Space: false, 1: false, 2: false, 3: false, 4: false, 5: false, Enter: false };
 document.addEventListener('keydown', (e) => {
@@ -195,6 +214,9 @@ document.addEventListener('keydown', (e) => {
             document.getElementById('win-screen').classList.add('hidden');
             startGame();
         }
+    }
+    if (e.code === 'Escape') {
+        togglePause();
     }
 });
 document.addEventListener('keyup', (e) => {
@@ -1060,6 +1082,7 @@ function startGame() {
     startScreen.classList.add('hidden');
     gameOverScreen.classList.add('hidden');
     levelScreen.classList.add('hidden');
+    pauseScreen.classList.add('hidden');
     uiLayer.classList.remove('hidden');
 }
 
@@ -1503,7 +1526,7 @@ function draw() {
     // Always draw stars in background
     stars.forEach(s => s.draw(ctx));
 
-    if (currentState !== STATE.PLAYING && currentState !== STATE.BOSS_FIGHT && currentState !== STATE.WIN) return;
+    if (currentState !== STATE.PLAYING && currentState !== STATE.BOSS_FIGHT && currentState !== STATE.WIN && currentState !== STATE.PAUSE) return;
 
     ctx.save();
 
